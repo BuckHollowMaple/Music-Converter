@@ -1,0 +1,71 @@
+IDEAS:
+
+- melody, bold color line down where there's predicted continuation of the note
+	- Find largest differences in timing between 0 notes, use as breakage 1
+	- Stop note continuation before 0 note or end
+	- Close proximity of notes in time, should be left
+	- Far proximity of notes in time, should be continued
+	- Notes of the same played Far after another will be continuation
+- alter background music so no copywrite infringement
+	- Half the volume of mp3 with overlay of the notes (moviepy)
+
+# -------------------------------------------------------------------------------------------
+				# Checks for notes that need octaves changed to be playable
+				note_len = len(note)
+				note_str = note
+				note = Note(note)
+				loop_counter = 0
+				while True:
+					if (len(instrument.find_fingering([note])) == 0) or (instrument.find_fingering([note])[0][0][1] > 4):
+						# Finger position is unavailable
+						if len(instrument.find_fingering([note])) == 0:
+							if int(note_str[note_len-1:]) > 4:
+								note.octave_down()
+							else:
+								note.octave_up()
+						# Finger position is greater than 4
+						elif instrument.find_fingering([note])[0][0][1] > 4:
+							note.octave_down()
+					else:
+						break
+					if loop_counter == 6:
+						brk = True
+						break
+					loop_counter += 1
+				if brk == False:
+
+# ----------------------------------------------------------------------------------------------
+notes_updated = []
+
+# Shifts notes into another octave
+def shiftOctaves(direction):
+	for x in range(0,len(pick[0])):
+		note = str(pick[0][x][0])
+		note = note[:len(note)-1] + '-' + note[len(note)-1:]
+		note = Note(note)
+		if direction == 'UP':
+			note.octave_up()
+			notes_updated.append([note])
+		else:
+			note.octave_down()
+			notes_updated.append([note])
+
+# Rectify octaves
+note_num,passes = 0,0
+while (note_num != len(pick[0])):
+	for x in range(0,len(pick[0])):
+		note = str(pick[0][x][0])
+		note = note[:len(note)-1] + '-' + note[len(note)-1:]
+		try:
+			if instrument.find_fingering([note])[0][0][1] > 4:
+				shiftOctaves('DOWN')
+				break
+		except Exception as e:
+			shiftOctaves('UP')
+			break
+		note_num += 1
+		if note_num == len(pick[0]):
+			break
+	passes += 1
+	if passes == 2:
+		break

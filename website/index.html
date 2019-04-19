@@ -1,0 +1,33 @@
+<html>
+
+<head>
+	<title>Violin Hero</title>
+	<meta property="name" content="claire-de-lune-by-debussy" />
+	<link rel="stylesheet" href="css/movie.css">
+	<script src="js/interface.js"></script>
+</head>
+
+<body>
+	<script src="js/pitchdetect.js"></script>
+
+	<div id="detector" class="vague">
+		<div class="pitch"><span id="pitch">--</span>Hz</div>
+		<div class="note"><span id="note">--</span></div>   
+		<canvas id="output" width=300 height=42></canvas>
+		<div id="detune"><span id="detune_amt">--</span></div>
+	</div>
+
+	<div id="video_box">
+		<img id="video_overlay_1" src="/img/correct.gif" />
+		<img id="video_overlay_2" src="/img/correct.gif" />
+		<img id="video_overlay_3" src="/img/correct.gif" />
+		<img id="video_overlay_4" src="/img/correct.gif" />
+		<video width="640" height="360" controls="controls">
+			<source src="http://127.0.0.1/video/claire-de-lune-by-debussy.mp4" onclick="start()" type="video/mp4">
+		</video>
+	</div>
+	<br />
+	<button id="activate" onclick="toggleLiveInput()">Activate Live Feedback</button>
+</body>
+
+</html>

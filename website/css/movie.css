@@ -1,0 +1,36 @@
+#video_overlay_1, #video_overlay_2, #video_overlay_3, #video_overlay_4 {
+	position:absolute;
+	width:6%;
+	height:20%;
+	bottom:5.8%;
+	z-index:300000;
+}
+#video_overlay_1 {
+	left: 17.2%;
+	visibility: hidden;
+}
+#video_overlay_2 {
+	left: 30%;
+	visibility: hidden;
+}
+#video_overlay_3 {
+	left: 42.8%;
+	visibility: hidden;
+}
+#video_overlay_4 {
+	left: 54.3%;
+	visibility: hidden;
+}
+#video_box {
+	position: relative;
+	display: inline-block;
+	left: 32%;
+}
+#activate {
+	position: absolute;
+	display: inline-block;
+	left: 43.5%;
+}
+#detector {
+	visibility: visible;
+}
